@@ -1,10 +1,42 @@
 # ReflectWorld / 映界
 
-一个现代化的视频播放平台，提供沉浸式的观看体验。
+<div align="center">
+
+**ReflectWorld / 映界** - 一个现代化的视频播放平台，提供沉浸式的观看体验。
 
 ![ReflectWorld](https://img.shields.io/badge/ReflectWorld-Video%20Platform-purple)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+</div>
+
+---
+
+## 项目简介
+
+ReflectWorld（映界）是一个轻量级、现代化的视频播放平台，致力于为用户提供沉浸式的视频观看体验。项目采用纯前端技术栈，无需后端服务器，部署简单，使用便捷。
+
+### 核心理念
+
+- **沉浸体验**：通过深色主题、流畅动画和全屏模式，打造沉浸式观看环境
+- **简洁高效**：代码精简，加载快速，性能优越
+- **用户友好**：智能进度保存、个性化问候、响应式设计
+
+### 适用场景
+
+- 个人视频分享网站
+- 作品展示平台
+- 在线视频学习平台
+- 企业产品展示
+
+### 技术亮点
+
+- 纯前端实现，部署零门槛
+- 本地存储，保护用户隐私
+- 响应式设计，完美适配移动端
+- 模块化代码，易于扩展
+
+---
 
 ## 功能特性
 
