@@ -17,7 +17,7 @@ const videos = [
     id: "5G 有多快.mp4",
     title: "5G 有多快",
     file: "5G 有多快.mp4",
-    cover: "https://i1.hdslb.com/bfs/archive/14945c3f6893e7489e15d731aa3032716e00ebea.jpg",
+    cover: "cover/14945c3f6893e7489e15d731aa3032716e00ebea.jpg",
     desc: "5G在日常使用中的真实体验"
   },
   {
