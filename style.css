@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+}
+
+.header {
+  background: #181818;
+  padding: 16px 24px;
+  font-size: 20px;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.watch-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  padding: 30px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.main-content video {
+  width: 100%;
+  border-radius: 12px;
+  background: black;
+}
+
+#videoTitle {
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.video-desc {
+  margin-top: 15px;
+  background: #181818;
+  padding: 15px;
+  border-radius: 12px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* 右侧推荐 */
+
+.recommend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.recommend-item {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.recommend-item:hover {
+  transform: scale(1.03);
+}
+
+.recommend-item img {
+  width: 140px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recommend-info {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* 响应式 */
+
+@media (max-width: 900px) {
+  .watch-layout {
+    grid-template-columns: 1fr;
+  }
+}

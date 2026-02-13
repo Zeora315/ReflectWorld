@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - 页面未找到 - ReflectWorld</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(circle at 20% 20%, #1a1a2e 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #16213e 0%, transparent 40%),
+    #0f0f0f;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.container{
+  text-align:center;
+  max-width:600px;
+  animation:fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.error-code{
+  font-size:120px;
+  font-weight:bold;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:20px;
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+.error-title{
+  font-size:28px;
+  margin-bottom:15px;
+  color:#fff;
+}
+
+.error-desc{
+  font-size:16px;
+  color:#ccc;
+  margin-bottom:40px;
+  line-height:1.6;
+}
+
+.error-icon{
+  font-size:80px;
+  margin-bottom:20px;
+  animation:shake 0.5s ease;
+}
+
+@keyframes shake{
+  0%,100%{
+    transform:rotate(0deg);
+  }
+  25%{
+    transform:rotate(-10deg);
+  }
+  75%{
+    transform:rotate(10deg);
+  }
+}
+
+.btn{
+  display:inline-block;
+  padding:15px 40px;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:500;
+  transition:0.3s;
+  box-shadow:0 4px 15px rgba(102,126,234,0.4);
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(102,126,234,0.6);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.suggestions{
+  margin-top:50px;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.suggestions h3{
+  font-size:18px;
+  color:#888;
+  margin-bottom:20px;
+}
+
+.suggestions ul{
+  list-style:none;
+  text-align:left;
+  max-width:400px;
+  margin:0 auto;
+}
+
+.suggestions li{
+  padding:12px 15px;
+  margin-bottom:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:8px;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.suggestions li:hover{
+  background:rgba(102,126,234,0.2);
+  transform:translateX(5px);
+}
+
+.suggestions a{
+  color:#ccc;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.suggestions a:hover{
+  color:#fff;
+}
+
+footer{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#181818;
+  padding:20px;
+  text-align:center;
+}
+
+footer .copyright{
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+footer .copyright a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+footer .copyright a:hover{
+  color:#fff;
+}
+
+footer .links{
+  font-size:14px;
+  color:#666;
+}
+
+footer .links a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+  margin:0 10px;
+}
+
+footer .links a:hover{
+  color:#fff;
+}
+
+@media(max-width:600px){
+  .error-code{
+    font-size:80px;
+  }
+
+  .error-title{
+    font-size:22px;
+  }
+
+  .error-desc{
+    font-size:14px;
+  }
+
+  .btn{
+    padding:12px 30px;
+    font-size:14px;
+  }
+
+  .suggestions ul{
+    max-width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="error-icon">🔍</div>
+  <div class="error-code">404</div>
+  <h1 class="error-title">页面未找到</h1>
+  <p class="error-desc">
+    抱歉，您访问的页面不存在或已被删除。<br>
+    可能是输入了错误的网址，或者页面已经移动。
+  </p>
+  <a href="index.html" class="btn">返回首页</a>
+</div>
+
+<footer>
+  <div class="copyright">
+    ©2019 - 2026 By <a href="https://zeora.top" target="_blank">Zeora</a>
+  </div>
+  <div class="links">
+    <a href="index.html">首页</a>
+    <a href="copyright.html">版权协议</a>
+    <a href="report.html">举报与反馈</a>
+  </div>
+</footer>
+
+</body>
+</html>

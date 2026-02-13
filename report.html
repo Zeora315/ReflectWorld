@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>举报与反馈 - ReflectWorld</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:#fff;
+  line-height:1.8;
+}
+
+header{
+  background:#181818;
+  padding:18px 24px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+header a{
+  color:#fff;
+  text-decoration:none;
+}
+
+.container{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 30px;
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:30px;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+h2{
+  font-size:24px;
+  margin:30px 0 15px;
+  color:#667eea;
+}
+
+h3{
+  font-size:20px;
+  margin:20px 0 10px;
+  color:#888;
+}
+
+p{
+  margin-bottom:15px;
+  color:#ccc;
+}
+
+ul{
+  margin:15px 0;
+  padding-left:30px;
+  color:#ccc;
+}
+
+li{
+  margin-bottom:10px;
+}
+
+.highlight{
+  color:#667eea;
+  font-weight:500;
+}
+
+.box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:20px;
+  margin:20px 0;
+}
+
+.box h3{
+  color:#667eea;
+  margin-top:0;
+}
+
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:15px 0;
+  color:#ccc;
+}
+
+.contact-item span{
+  font-size:18px;
+}
+
+.report-types{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+  margin:20px 0;
+}
+
+.report-type{
+  background:rgba(102,126,234,0.1);
+  border:1px solid rgba(102,126,234,0.3);
+  border-radius:10px;
+  padding:15px;
+  transition:0.3s;
+}
+
+.report-type:hover{
+  background:rgba(102,126,234,0.2);
+  transform:translateY(-3px);
+}
+
+.report-type h4{
+  color:#667eea;
+  margin-bottom:8px;
+  font-size:16px;
+}
+
+.report-type p{
+  font-size:14px;
+  margin:0;
+}
+
+#tcomment{
+  margin-top:60px;
+}
+
+footer{
+  background:#181818;
+  padding:30px 20px;
+  text-align:center;
+  margin-top:60px;
+}
+
+footer .copyright{
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+footer .copyright a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+footer .copyright a:hover{
+  color:#fff;
+}
+
+footer .links{
+  font-size:14px;
+  color:#666;
+}
+
+footer .links a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+  margin:0 10px;
+}
+
+footer .links a:hover{
+  color:#fff;
+}
+
+@media(max-width:600px){
+  .container{
+    padding:0 20px;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  .report-types{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html">← 映界</a>
+</header>
+
+<div class="container">
+  <h1>举报与反馈</h1>
+
+  <p class="highlight">感谢您帮助我们改进！如果您发现任何问题或有任何建议，请告诉我们。</p>
+
+  <h2>举报类型</h2>
+  <div class="report-types">
+    <div class="report-type">
+      <h4>🚫 违规内容</h4>
+      <p>涉及暴力、色情、政治等违规内容</p>
+    </div>
+    <div class="report-type">
+      <h4>📄 版权问题</h4>
+      <p>未经授权使用他人作品</p>
+    </div>
+    <div class="report-type">
+      <h4>🐛 技术问题</h4>
+      <p>视频无法播放、页面加载失败等</p>
+    </div>
+    <div class="report-type">
+      <h4>💡 功能建议</h4>
+      <p>希望添加的新功能或改进建议</p>
+    </div>
+    <div class="report-type">
+      <h4>🎨 界面问题</h4>
+      <p>显示异常、布局错乱等</p>
+    </div>
+    <div class="report-type">
+      <h4>📝 其他问题</h4>
+      <p>任何其他需要反馈的问题</p>
+    </div>
+  </div>
+
+  <h2>举报流程</h2>
+  <div class="box">
+    <ol style="margin-left:20px;color:#ccc;">
+      <li style="margin-bottom:10px;">在下方评论区详细描述您的问题</li>
+      <li style="margin-bottom:10px;">提供相关截图或视频链接（如适用）</li>
+      <li style="margin-bottom:10px;">我们会在24小时内审核并处理</li>
+      <li>处理结果将通过评论区回复告知</li>
+    </ol>
+  </div>
+
+  <h2>注意事项</h2>
+  <ul>
+    <li>请提供真实、准确的信息</li>
+    <li>恶意举报可能会导致账号被封禁</li>
+    <li>我们会保护您的隐私，不会公开举报人信息</li>
+    <li>对于重复举报，我们只处理一次</li>
+  </ul>
+
+  <h2>联系方式</h2>
+  <div class="box">
+    <div class="contact-item">
+      <span>🌐</span>
+      <span>网站：<a href="https://zeora.top" target="_blank" style="color:#667eea;">https://zeora.top</a></span>
+    </div>
+    <div class="contact-item">
+      <span>📧</span>
+      <span>邮箱：通过评论区留言</span>
+    </div>
+    <div class="contact-item">
+      <span>⏰</span>
+      <span>响应时间：24小时内</span>
+    </div>
+  </div>
+
+  <h2>反馈区</h2>
+  <p>请在下方评论区提交您的举报或反馈，我们会尽快处理。</p>
+
+  <div id="tcomment"></div>
+</div>
+
+<footer>
+  <div class="copyright">
+    ©2019 - 2026 By <a href="https://zeora.top" target="_blank">Zeora</a>
+  </div>
+  <div class="links">
+    <a href="index.html">返回首页</a>
+    <a href="copyright.html">版权协议</a>
+  </div>
+</footer>
+
+<!-- Twikoo -->
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
+<script>
+  twikoo.init({
+    envId: 'https://twikoo.315996.xyz',
+    el: '#tcomment',
+    lang: 'zh-CN'
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReflectWorld</title>
+
+<style>
+body{
+  margin:0;
+  background:#0f0f0f;
+  color:#fff;
+  font-family:sans-serif;
+}
+
+header{
+  background:#181818;
+  padding:18px 24px;
+  font-size:22px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.search-box{
+  position:relative;
+  width:40px;
+  height:40px;
+  transition:width 0.3s ease;
+}
+
+.search-box.expanded{
+  width:280px;
+}
+
+.search-box input{
+  position:absolute;
+  right:0;
+  top:0;
+  width:40px;
+  height:40px;
+  padding:0 40px 0 15px;
+  border:none;
+  border-radius:20px;
+  background:#2a2a2a;
+  color:#fff;
+  font-size:14px;
+  outline:none;
+  transition:all 0.3s ease;
+  opacity:0;
+  pointer-events:none;
+}
+
+.search-box.expanded input{
+  width:100%;
+  opacity:1;
+  pointer-events:auto;
+}
+
+.search-box input:focus{
+  background:#333;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.1);
+}
+
+.search-box input::placeholder{
+  color:#888;
+}
+
+.search-icon{
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:18px;
+  color:#aaa;
+  transition:0.3s;
+  z-index:10;
+}
+
+.search-icon:hover{
+  color:#fff;
+}
+
+.search-box.expanded .search-icon{
+  right:5px;
+  width:30px;
+  height:30px;
+  font-size:16px;
+}
+
+.search-results{
+  position:absolute;
+  top:100%;
+  left:0;
+  width:280px;
+  margin-top:8px;
+  background:#1a1a1a;
+  border-radius:12px;
+  max-height:400px;
+  overflow-y:auto;
+  display:none;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  z-index:100;
+}
+
+.search-results.show{
+  display:block;
+}
+
+.search-result-item{
+  padding:15px;
+  cursor:pointer;
+  transition:0.2s;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.search-result-item:hover{
+  background:#2a2a2a;
+}
+
+.search-result-item img{
+  width:80px;
+  height:45px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.search-result-info{
+  flex:1;
+}
+
+.search-result-title{
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:4px;
+}
+
+.search-result-desc{
+  font-size:12px;
+  color:#888;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.no-results{
+  padding:20px;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+}
+
+footer{
+  background:#181818;
+  padding:30px 20px;
+  text-align:center;
+  margin-top:60px;
+}
+
+footer .hitokoto{
+  font-size:16px;
+  color:#ccc;
+  margin-bottom:15px;
+  line-height:1.6;
+}
+
+footer .hitokoto a{
+  color:#888;
+  text-decoration:none;
+  font-size:14px;
+}
+
+footer .hitokoto a:hover{
+  color:#fff;
+}
+
+footer .copyright{
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+footer .copyright a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+footer .copyright a:hover{
+  color:#fff;
+}
+
+footer .links{
+  font-size:14px;
+  color:#666;
+}
+
+footer .links a{
+  color:#888;
+  text-decoration:none;
+  transition:0.3s;
+  margin:0 10px;
+}
+
+footer .links a:hover{
+  color:#fff;
+}
+
+.banner{
+  position:relative;
+  width:100%;
+  max-width:1400px;
+  height:400px;
+  margin:30px auto 0;
+  overflow:hidden;
+  border-radius:16px;
+}
+
+.banner-track{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.5s ease;
+}
+
+.banner-slide{
+  min-width:100%;
+  height:100%;
+  position:relative;
+  cursor:pointer;
+}
+
+.banner-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.banner-overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:40px 30px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.9));
+}
+
+.banner-title{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.banner-desc{
+  font-size:16px;
+  color:#ddd;
+}
+
+.banner-dots{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+}
+
+.banner-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.4);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.banner-dot.active{
+  background:#fff;
+  width:30px;
+  border-radius:5px;
+}
+
+.banner-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:50px;
+  background:rgba(0,0,0,0.5);
+  border:none;
+  border-radius:50%;
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.banner-arrow:hover{
+  background:rgba(0,0,0,0.8);
+}
+
+.banner-arrow.prev{
+  left:20px;
+}
+
+.banner-arrow.next{
+  right:20px;
+}
+
+.container{
+  max-width:1400px;
+  margin:40px auto;
+  padding:0 20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:28px;
+}
+
+.card{
+  cursor:pointer;
+  transition:.3s;
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.card-title{
+  margin-top:12px;
+  font-size:16px;
+}
+
+.card-desc{
+  margin-top:6px;
+  font-size:13px;
+  color:#aaa;
+}
+
+.watched{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:rgba(0,0,0,0.7);
+  padding:4px 8px;
+  font-size:12px;
+  border-radius:20px;
+  color:#00ffae;
+}
+
+.greeting{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  padding:20px 30px;
+  border-radius:16px;
+  box-shadow:0 8px 32px rgba(102,126,234,0.4);
+  text-align:center;
+  font-size:18px;
+  font-weight:500;
+  color:#fff;
+  z-index:1000;
+  animation:slideIn 0.5s ease,fadeOut 0.5s ease 4.5s forwards;
+  max-width:400px;
+}
+
+.greeting-close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  cursor:pointer;
+  font-size:20px;
+  color:rgba(255,255,255,0.7);
+  transition:0.3s;
+  line-height:1;
+}
+
+.greeting-close:hover{
+  color:#fff;
+}
+
+@keyframes slideIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    transform:translateY(20px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>映界</div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索视频...">
+    <div class="search-icon" id="searchIcon">🔍</div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</header>
+
+<div class="banner">
+  <div class="banner-track" id="bannerTrack"></div>
+  <button class="banner-arrow prev" id="prevBtn">‹</button>
+  <button class="banner-arrow next" id="nextBtn">›</button>
+  <div class="banner-dots" id="bannerDots"></div>
+</div>
+
+<div class="container">
+  <div class="grid" id="videoGrid"></div>
+</div>
+
+<footer>
+  <div class="hitokoto">
+    <span id="hitokotoText">加载中...</span>
+    <a href="https://developer.hitokoto.cn/sentence/" target="_blank">—— 一言</a>
+  </div>
+  <div class="copyright">
+    ©2019 - 2026 By <a href="https://zeora.top" target="_blank">Zeora</a>
+  </div>
+  <div class="links">
+    <a href="copyright.html">版权协议</a>
+    <a href="report.html">举报与反馈</a>
+  </div>
+</footer>
+
+<div class="greeting" id="greeting"></div>
+
+<script src="videos.js"></script>
+
+<script>
+const grid=document.getElementById("videoGrid");
+const searchInput=document.getElementById("searchInput");
+const searchResults=document.getElementById("searchResults");
+const searchIcon=document.getElementById("searchIcon");
+const searchBox=document.querySelector(".search-box");
+
+const bannerTrack=document.getElementById("bannerTrack");
+const bannerDots=document.getElementById("bannerDots");
+const prevBtn=document.getElementById("prevBtn");
+const nextBtn=document.getElementById("nextBtn");
+
+let currentBanner=0;
+let bannerInterval;
+let searchTimeout;
+
+searchIcon.onclick=()=>{
+  searchBox.classList.toggle("expanded");
+  if(searchBox.classList.contains("expanded")){
+    searchInput.focus();
+  }
+};
+
+searchInput.addEventListener("blur",(e)=>{
+  if(!searchInput.value.trim()){
+    searchBox.classList.remove("expanded");
+  }
+  setTimeout(hideSearchResults,200);
+});
+
+function fuzzySearch(query){
+  if(!query.trim()){
+    return videos;
+  }
+
+  const lowerQuery=query.toLowerCase();
+  return videos.filter(video=>{
+    const title=video.title.toLowerCase();
+    const desc=video.desc.toLowerCase();
+    return title.includes(lowerQuery)||desc.includes(lowerQuery);
+  });
+}
+
+function showSearchResults(results){
+  searchResults.innerHTML="";
+
+  if(results.length===0){
+    searchResults.innerHTML='<div class="no-results">未找到相关视频</div>';
+    searchResults.classList.add("show");
+    return;
+  }
+
+  results.forEach(video=>{
+    const item=document.createElement("div");
+    item.className="search-result-item";
+    item.innerHTML=`
+      <img src="${video.cover}">
+      <div class="search-result-info">
+        <div class="search-result-title">${video.title}</div>
+        <div class="search-result-desc">${video.desc}</div>
+      </div>
+    `;
+    item.onclick=()=>{
+      window.location.href=`watch.html?id=${video.id}`;
+    };
+    searchResults.appendChild(item);
+  });
+
+  searchResults.classList.add("show");
+}
+
+function hideSearchResults(){
+  searchResults.classList.remove("show");
+}
+
+searchInput.addEventListener("input",(e)=>{
+  clearTimeout(searchTimeout);
+  const query=e.target.value;
+
+  if(!query.trim()){
+    hideSearchResults();
+    renderVideos(videos);
+    return;
+  }
+
+  searchTimeout=setTimeout(()=>{
+    const results=fuzzySearch(query);
+    showSearchResults(results);
+    renderVideos(results);
+  },300);
+});
+
+searchInput.addEventListener("focus",(e)=>{
+  if(e.target.value.trim()){
+    const results=fuzzySearch(e.target.value);
+    showSearchResults(results);
+  }
+});
+
+function renderVideos(videoList){
+  grid.innerHTML="";
+  const watchedVideos=JSON.parse(localStorage.getItem("watched"))||[];
+
+  videoList.forEach(video=>{
+    const card=document.createElement("div");
+    card.className="card";
+
+    card.innerHTML=`
+      <img src="${video.cover}">
+      <div class="card-title">${video.title}</div>
+      <div class="card-desc">${video.desc}</div>
+    `;
+
+    if(watchedVideos.includes(video.id)){
+      const badge=document.createElement("div");
+      badge.className="watched";
+      badge.innerText="已观看";
+      card.appendChild(badge);
+    }
+
+    card.onclick=()=>{
+      window.location.href=`watch.html?id=${video.id}`;
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+function initBanner(){
+  videos.forEach((video,index)=>{
+    const slide=document.createElement("div");
+    slide.className="banner-slide";
+    slide.innerHTML=`
+      <img src="${video.cover}">
+      <div class="banner-overlay">
+        <div class="banner-title">${video.title}</div>
+        <div class="banner-desc">${video.desc}</div>
+      </div>
+    `;
+    slide.onclick=()=>{
+      window.location.href=`watch.html?id=${video.id}`;
+    };
+    bannerTrack.appendChild(slide);
+
+    const dot=document.createElement("div");
+    dot.className="banner-dot"+(index===0?" active":"");
+    dot.onclick=()=>goToBanner(index);
+    bannerDots.appendChild(dot);
+  });
+
+  startAutoPlay();
+}
+
+function goToBanner(index){
+  currentBanner=index;
+  updateBanner();
+}
+
+function nextBanner(){
+  currentBanner=(currentBanner+1)%videos.length;
+  updateBanner();
+}
+
+function prevBanner(){
+  currentBanner=(currentBanner-1+videos.length)%videos.length;
+  updateBanner();
+}
+
+function updateBanner(){
+  bannerTrack.style.transform=`translateX(-${currentBanner*100}%)`;
+  document.querySelectorAll(".banner-dot").forEach((dot,index)=>{
+    dot.classList.toggle("active",index===currentBanner);
+  });
+}
+
+function startAutoPlay(){
+  bannerInterval=setInterval(nextBanner,5000);
+}
+
+function stopAutoPlay(){
+  clearInterval(bannerInterval);
+}
+
+prevBtn.onclick=()=>{
+  stopAutoPlay();
+  prevBanner();
+  startAutoPlay();
+};
+
+nextBtn.onclick=()=>{
+  stopAutoPlay();
+  nextBanner();
+  startAutoPlay();
+};
+
+bannerTrack.onmouseenter=stopAutoPlay;
+bannerTrack.onmouseleave=startAutoPlay;
+
+initBanner();
+renderVideos(videos);
+
+async function loadHitokoto(){
+  try{
+    const response=await fetch("https://v1.hitokoto.cn");
+    const data=await response.json();
+    document.getElementById("hitokotoText").textContent=data.hitokoto;
+  }catch(error){
+    document.getElementById("hitokotoText").textContent="生活明朗，万物可爱。";
+  }
+}
+
+function getGreeting(){
+  const hour=new Date().getHours();
+  const greetings=[
+    {greeting:"晚安😴",startTime:0,endTime:5},
+    {greeting:"早上好鸭👋, 祝你一天好心情！",startTime:6,endTime:9},
+    {greeting:"上午好👋, 状态很好，鼓励一下～",startTime:10,endTime:10},
+    {greeting:"11点多啦, 在坚持一下就吃饭啦～",startTime:11,endTime:11},
+    {greeting:"午安👋, 宝贝",startTime:12,endTime:14},
+    {greeting:"🌈充实的一天辛苦啦！",startTime:14,endTime:18},
+    {greeting:"19点喽, 奖励一顿丰盛的大餐吧🍔。",startTime:19,endTime:19},
+    {greeting:"晚上好👋, 在属于自己的时间好好放松😌~",startTime:20,endTime:24}
+  ];
+
+  for(const item of greetings){
+    if(hour>=item.startTime&&hour<=item.endTime){
+      return item.greeting;
+    }
+  }
+  return "你好👋";
+}
+
+function showGreeting(){
+  const greetingEl=document.getElementById("greeting");
+  greetingEl.innerHTML=getGreeting()+'<span class="greeting-close" onclick="this.parentElement.remove()">×</span>';
+}
+
+loadHitokoto();
+showGreeting();
+</script>
+
+</body>
+</html>
