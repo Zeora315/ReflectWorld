@@ -100,3 +100,18 @@ videos.forEach(video => {
     recommend.appendChild(item);
   }
 });
+
+// ======================
+// 初始化 Twikoo 评论系统
+// ======================
+
+// 等待 DOM 加载完成
+window.addEventListener('DOMContentLoaded', () => {
+  // 初始化 Twikoo，使用视频 ID 作为路径区分不同视频的评论区
+  twikoo.init({
+    envId: 'https://twikoo.315996.xyz',
+    el: '#tcomment',
+    lang: 'zh-CN',
+    path: '/video/' + current.id // 使用视频 ID 作为路径，确保每个视频有独立的评论区
+  });
+});
