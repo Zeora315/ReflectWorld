@@ -19,12 +19,5 @@ const videos = [
     file: "5G 有多快.mp4",
     cover: "cover/14945c3f6893e7489e15d731aa3032716e00ebea.jpg",
     desc: "5G在日常使用中的真实体验"
-  },
-  {
-    id: "video2",
-    title: "【春晚鬼畜】赵本山：我就是念诗之王！",
-    file: "video2.mp4",
-    cover: "cover/cover2.png",
-    desc: "赵本山是春晚的标志性人物，没有他的春晚对我来说不完整。 "
   }
 ];
