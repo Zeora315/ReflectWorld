@@ -28,6 +28,13 @@ const videos = [
     desc: "新年听基米，越听越有米😝"
   },
   {
+    id: "2018年回形针如何赚钱？.mp4",
+    title: "2018年回形针如何赚钱？",
+    file: "Sp.001 2018 年回形针如何赚钱？.mp4",
+    cover: "cover/17e342d6e2dcda40ffc9dfd4d0473e04.jpg",
+    desc: "Sp.001"
+  },
+  {
     id: "5G 有多快.mp4",
     title: "5G 有多快",
     file: "5G 有多快.mp4",
